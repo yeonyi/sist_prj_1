@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public class AuthorityTest {
 	
-	Map<String, User> map = UserRepository.getUserList();
 	UserRepository ur = UserRepository.getInstance(); 
+	Map<String, User> map = UserRepository.getUserList();
 	
 	User u = ur.findByKey("admin");//key값을 매개변수로 받음
 	
@@ -44,8 +44,12 @@ public class AuthorityTest {
 
 	public static void main(String[] args) {
 		AuthorityTest at = new AuthorityTest();
-		at.loginAurthority();
-		at.reportProduce();
+		
+		boolean isAuth = at.loginAurthority();
+		boolean isReportAuth = at.reportProduce();
+
+		System.out.println("loginAurthority() : " + isAuth);
+		System.out.println("reportProduce() : " + isReportAuth);
 	
 	}//main
 

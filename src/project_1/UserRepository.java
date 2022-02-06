@@ -29,8 +29,7 @@ public class UserRepository {
 
 	public static Map<String, User> getUserList() {
 		return userList;
-	}
-	
+	}// getUserList
 	
 	
 }//class
