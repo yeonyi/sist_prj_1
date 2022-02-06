@@ -9,11 +9,9 @@ public class UserRepository {
 //	User root = new User ("root","1111",false);
 //	User adminstrator = new User ("adminstrator","12345",true);
 	
-//	private static Map<String,User> userList = new HashMap<String, User>();
-	public static Map<String,User> userList = new HashMap<String, User>();
+	private static Map<String,User> userList = new HashMap<String, User>();
 	
-//	private static final UserRepository instance = new UserRepository();
-	public static final UserRepository instance = new UserRepository();
+	private static final UserRepository instance = new UserRepository();
 	
 	public static UserRepository getInstance() {
 		userList.put("admin", new User("admin","1234",true));
@@ -22,11 +20,17 @@ public class UserRepository {
 		return instance;
 	}//getInstance
 	
-//	private UserRepository() {
-//	}//UseRepository
+	private UserRepository() {
+	}//UseRepository
 	
 	public User findByKey(String id) {
 		return userList.get(id);
 	}//findByKey
+
+	public static Map<String, User> getUserList() {
+		return userList;
+	}
+	
+	
 	
 }//class
