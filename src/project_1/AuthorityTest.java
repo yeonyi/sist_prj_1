@@ -11,9 +11,12 @@ import java.util.Map;
 public class AuthorityTest {
 	
 	UserRepository ur = UserRepository.getInstance(); 
-	Map<String, User> map = UserRepository.getUserList();
+//	Map<String, User> map = UserRepository.getUserList();
+	Map<String, User> map = ur.getUserList();
+	
 	
 	User u = ur.findByKey("admin");//key값을 매개변수로 받음
+	String pw = u.getPassword();
 	
 	public boolean loginAurthority() {
 		
@@ -21,11 +24,25 @@ public class AuthorityTest {
 		System.out.println(map.containsKey("root"));
 		System.out.println(map.containsKey("adminstrator"));//UserRepository의 HashMap을 잘 불러왔는지 확인
 		
-		
-		if(u.getId().equals("admin") || u.getId().equals("root") || u.getId().equals("administrator")) {
+		if(u.getId().equals("admin") && pw.equals("1234")) {
 			System.out.println("로그인 인증 성공");
 			return true;
 		}//end if
+		
+		if(u.getId().equals("root") && pw.equals("1111")) {
+			System.out.println("로그인 인증 성공");
+			return true;
+		}//end if
+		
+		if(u.getId().equals("administor") && pw.equals("12345")) {
+			System.out.println("로그인 인증 성공");
+			return true;
+		}//end if
+		
+//		if(u.getId().equals("admin") || u.getId().equals("root") || u.getId().equals("administrator")) {
+//			System.out.println("로그인 인증 성공");
+//			return true;
+//		}//end if
 			System.out.println("로그인 정보가 없습니다.");
 			return false;
 		
