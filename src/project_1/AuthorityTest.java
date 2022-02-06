@@ -50,7 +50,7 @@ public class AuthorityTest {
 	
 	public boolean reportProduce() {
 		
-		if(u.getId().equals("root")) {
+		if(u.isReportAuthority() == false) {
 			System.out.println("문서 생성권한 없음");
 			return false;
 		}//end if
