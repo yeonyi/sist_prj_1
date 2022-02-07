@@ -40,19 +40,23 @@ public class JButtonEvt implements ActionListener {
 				e.printStackTrace();
 			}
 
-		} // end if
+		} 
 
 		// report 버튼 이벤트 처리
-		if (ae.getSource() == ul.getReportJbtn()) {
+		String str = ""; //아이디 초기화
+		String str1 = ""; //비밀번호 초기화
+		if(a.loginAuthenticate(str, str1) && a.reportAuthenticate(str)) {//로그인 성공과 report 권한 생성
+			if (ae.getSource() == ul.getReportJbtn()) {
 			
-			try {
-				new JButtonEvt(ul).creatFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}//end catch
+				try {
+					new JButtonEvt(ul).creatFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}//end catch
+			}
 			
-		}//end if
-
+			
+		}
 	}// actionPerformed
 
 	
