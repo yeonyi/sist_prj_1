@@ -13,7 +13,7 @@ public class Authority {
 
 	public boolean reportAuthenticate (String id) {
 		if((user = ur.findByKey(id))!=null) {
-			return (user.getId().equals("root"));
+			return user.isReportAuthority();
 		}//end if
 		return false;
 	}//reportAuthenticate 
