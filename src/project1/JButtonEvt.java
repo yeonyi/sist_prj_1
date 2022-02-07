@@ -27,6 +27,10 @@ public class JButtonEvt implements ActionListener {
 	public JButtonEvt(UserLog ul) {
 		this.ul = ul;
 	}// ButtonEvt
+	
+	public JButtonEvt(Authority a) {
+		this.a = a;
+	}// ButtonEvt
 
 	@Override
 	public void actionPerformed(ActionEvent ae)  {
@@ -47,7 +51,6 @@ public class JButtonEvt implements ActionListener {
 		String str1 = ""; //비밀번호 초기화
 		if(a.loginAuthenticate(str, str1) && a.reportAuthenticate(str)) {//로그인 성공과 report 권한 생성
 			if (ae.getSource() == ul.getReportJbtn()) {
-			
 				try {
 					new JButtonEvt(ul).creatFile();
 				} catch (IOException e) {
