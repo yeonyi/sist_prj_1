@@ -1,4 +1,4 @@
-package project_1;
+package project1;
 
 /**
  * UserClass

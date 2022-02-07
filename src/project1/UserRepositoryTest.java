@@ -1,4 +1,4 @@
-package project_1;
+package project1;
 /**
  * UserRepository가 잘 구현되는지 확인
  * @author yeonyi
