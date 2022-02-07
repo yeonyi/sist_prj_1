@@ -6,7 +6,7 @@ public class Authority {
 
 	public boolean loginAuthenticate (String id, String password) {
 		if((user = ur.findByKey(id))!=null) {
-			return (user.getId() == id) && (user.getPassword()==password);
+			return (user.getId().equals(id)) && (user.getPassword().equals(password));
 		}//end if
 		return false;
 	}//loginAuthenticate

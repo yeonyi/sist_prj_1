@@ -14,11 +14,11 @@ import javax.swing.JTextField;
 public class LoginTest extends JFrame implements ActionListener{
 	
 	private JLabel jblLogin, jlbPassword;
-	private JTextField  txtId, txtPw;
+	private JTextField  txtId;
+	private JPasswordField txtPw;
 	private JButton logBtn;
 	
-	private UserRepository ur = UserRepository.getInstance();
-	private User user = null;
+	Authority a = new Authority();
 	
 	public LoginTest() {
 	
@@ -30,7 +30,6 @@ public class LoginTest extends JFrame implements ActionListener{
 		txtId = new JTextField(10); 
 		txtPw = new JPasswordField(10);  
 		logBtn = new JButton("Log in");
-		
 		logBtn.addActionListener(this);
 		
 		setLayout(new GridLayout(3, 3));
@@ -47,21 +46,22 @@ public class LoginTest extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}//LoginTest
 	
+	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		String id = user.getId();
-		String pw = user.getPassword();
+		String id = txtId.getText();
+		String pw = new String(txtPw.getPassword());//getText()로 가져와도 되지만 보안상 getPassword() 의 사용을 권장
 		
-		if(ae.getSource()==logBtn) {
-			if(id.equals(txtId) && pw.equals(txtPw)) {
-				JOptionPane.showMessageDialog(null, "로그인 성공");
-				}//end if
-			}else{
-				JOptionPane.showMessageDialog(null, "로그인 실패");
-			}//end else
+		if(a.loginAuthenticate(id, pw) == true) {
+			JOptionPane.showMessageDialog(logBtn, "로그인 성공");
+		}else {
+			JOptionPane.showMessageDialog(logBtn, "로그인 실패");
+		}//end else	
+		
+		System.out.println(id);
+		System.out.println(pw);
 			
 	}//actionPerformed
-
 
 	public static void main(String[] args) {
 		

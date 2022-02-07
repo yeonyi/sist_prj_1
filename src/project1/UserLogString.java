@@ -2,33 +2,37 @@ package project1;
 
 import java.io.IOException;
 
+/**
+ * main method arguments 받기
+ * @author user
+ */
 public class UserLogString {
-	
+
 	public static void main(String[] args) {
-		UserLog ul = new UserLog();
-		int startLine = Integer.parseInt(args[0]); //시작라인 : runConfig에서 변수 두 개 넣어주셔야 에러나지 않습니다
-		int endLine = Integer.parseInt(args[1]); //끝라인
+
 		try {
-			ul.readFile(startLine, endLine);
+			UserLog ul = new UserLog();
+			
+			int fileLineLength = Integer.valueOf(ul.getFileString().size()); //파일안의 줄의 개수
+			int args0 = Integer.valueOf(args[0]); 
+			int args1 = Integer.valueOf(args[1]);
+
+			if (args[0] != null && args[1] != null) {
+				if (args0 > 0 && args1 < fileLineLength+1) {// text 줄 개수를 벗어나지 않는다면
+					ul.setStartLine(Integer.parseInt(args[0])); // 시작라인 : runConfig에서 변수 두 개 넣어주셔야 에러나지 않습니다
+					ul.setEndLine(Integer.parseInt(args[1]));
+				}else if(ul.getFile().exists()!=true) { //파일이 존재하지 않거나 취소되었을 때
+					System.out.println("파일 없음");
+				}else {
+					System.err.println("범위 내 라인 수가 아닙니다.");
+				}
+				// end else
+			} // end if
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} // end catch
-		ul.dispose(); //중요!!
-
-		//모두 String형을 반환합니다. 
-		//1. 최다사용 키의 횟수
-		System.out.println(ul.printKey());
-		//2.브라우저별 접속 횟수
-		System.out.println(ul.printBrowser()); 
-		//3.http요청 발생 횟수, 비율
-		System.out.println(ul.printHttpSucFail());
-		//4.요청이 가장 많은 시간
-		System.out.println(ul.printReqTime());
-		//5.에러코드403
-		System.out.println(ul.printErrCode403());
-		//6.에러코드500
-		System.out.println(ul.printErrCode500());
 
 	}// main
 
-}
+}// class
