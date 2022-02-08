@@ -1,4 +1,4 @@
-package project1;
+package project_1;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
+
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -21,16 +21,17 @@ import javax.swing.JTextArea;
 public class JButtonEvt implements ActionListener {
 
 	private UserLog ul;
-	
+	private Login login;//0208 추가 - login 객체 받아오기
 
-	Authority a = new Authority();
 	
 	public JButtonEvt(UserLog ul) {
 		this.ul = ul;
 	}// ButtonEvt
 	
-	public JButtonEvt(Authority a) {
-		this.a = a;
+	//0208 추가 - login 객체 받아오기
+	public JButtonEvt(UserLog ul,Login login) {
+		this.ul = ul;
+		this.login = login;
 	}// ButtonEvt
 
 	@Override
@@ -45,22 +46,24 @@ public class JButtonEvt implements ActionListener {
 				e.printStackTrace();
 			}
 
-		} 
+		} // end if
 
 		// report 버튼 이벤트 처리
-		String str = ""; //아이디 초기화
-		String str1 = ""; //비밀번호 초기화
-		if(a.loginAuthenticate(str, str1) && a.reportAuthenticate(str)) {//로그인 성공과 report 권한 생성
-			if (ae.getSource() == ul.getReportJbtn()) {
-				try {
-					new JButtonEvt(ul).creatFile();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}//end catch
-			}
+		if ((ae.getSource() == ul.getReportJbtn()) 
+				//0208 추가 - report권한 검증
+				&& new Authority().reportAuthenticate(login.getJtfId().getText())) {
 			
-			
+			try {
+				//showMessageDialog
+				new JButtonEvt(ul).creatFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}			
+		} else {
+			//showMessageDialog
+			System.err.println("NOT VALID USER");
 		}
+
 	}// actionPerformed
 
 	
@@ -87,6 +90,8 @@ public class JButtonEvt implements ActionListener {
 		jd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
+	
+	
 	public void creatFile() throws IOException {
 		
 		//폴더 생성
@@ -102,7 +107,10 @@ public class JButtonEvt implements ActionListener {
 		fw.write(ul.printReport());
 		fw.flush();
 		fw.close();
+			
 		
 	} // creatFile
 	
+	
+
 }// class

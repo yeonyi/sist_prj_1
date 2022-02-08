@@ -57,7 +57,6 @@ public class LoginTest extends JFrame implements ActionListener{
 		}else {
 			JOptionPane.showMessageDialog(logBtn, "로그인 실패");
 		}//end else	
-		
 		System.out.println(id);
 		System.out.println(pw);
 			
