@@ -1,14 +1,14 @@
-package project1;
+package project_1.User;
 
 /**
  * UserClass
- * @author Â°Â­Â¸Ã­ÃÃ˜
+ * @author User
  *
  */
 public class User {
 	private String id;
 	private String password;
-	private boolean reportAuthority; //reportÂ¹Â®Â¼Â­ Â»Ã½Â¼Âº Â±Ã‡Ã‡Ã‘
+	private boolean reportAuthority; //report¹®¼­ »ı¼º ±ÇÇÑ
 	
 	
 	
@@ -16,18 +16,22 @@ public class User {
 		this.id = id;
 		this.password = password;
 		this.reportAuthority = reportAuthority;
-	}//User
+	}
 	
 	//getter
 	public String getId() {
 		return id;
-	}//getId
+	}
 	public String getPassword() {
 		return password;
-	}//getPassword
+	}
 	public boolean isReportAuthority() {
 		return reportAuthority;
-	}//isReportAuthority
+	}
+	
+	
+	
+	
+	
 
-
-}//class
+}

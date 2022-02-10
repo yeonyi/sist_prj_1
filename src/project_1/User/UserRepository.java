@@ -1,4 +1,4 @@
-package project_1;
+package project_1.User;
 
 
 import java.util.HashMap;
@@ -10,20 +10,27 @@ import java.util.Map;
  * static에 HashMap을 하나만 생성해서 <br>
  * UserRepository 객체명 = UserRepository.getInstance(); 로 사용 <br>
  * 생성자 생성 불가
- * @author 강명준
+ * @author User
  *
  */
 public class UserRepository {
 	
-	private static Map<String,User> userList = new HashMap<String, User>(); //static
+	private static Map<String, User> userList = new HashMap<String, User>(); //static
 	
 	private static final UserRepository instance = new UserRepository(); //static
 	
-	//인스턴스 생성시 기본 유저리스트 입력
+
+	/**
+	 * userList 비어있을시에만 초기값 입력<br>
+	 * getInstance로만 UserRepository 불러오기 가능
+	 * @return
+	 */
 	public static UserRepository getInstance() {
-		userList.put("admin", new User("admin","1234",true));
-		userList.put("root", new User("root","1111",false));
-		userList.put("adminstrator", new User("adminstrator","12345",true));
+		if (userList.isEmpty()) {
+			userList.put("admin", new User("admin","1234",true));
+			userList.put("root", new User("root","1111",false));
+			userList.put("adminstrator", new User("adminstrator","12345",true));
+		}
 		
 		return instance;
 		
